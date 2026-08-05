@@ -18,7 +18,7 @@ local vape
 local loadstring = function(...)
 	local res, err = loadstring(...)
 	if err and vape then
-		vape:CreateNotification('Vape', 'Failed to load : '..err, 30, 'alert')
+		vape:CreateNotification('SAINT', 'Failed to load : '..err, 30, 'alert')
 	end
 	return res
 end
@@ -38,7 +38,7 @@ local httpService = cloneref(game:GetService("HttpService"))
 local function downloadFile(path, func)
 	if not isfile(path) then
 		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/MaxlaserTech/CatV6/'..readfile('catsix/profiles/commit.txt')..'/'..select(1, path:gsub('catsix/', '')), true)
+			return game:HttpGet('https://raw.githubusercontent.com/hogoromoeton67/saint-v1/main/'..select(1, path:gsub('catsix/', '')), true)
 		end)
 		if not suc or res == '404: Not Found' then
 			error(res)
@@ -64,7 +64,7 @@ local function finishLoading()
 				if shared.VapeDeveloper then
 					loadstring(readfile('catsix/main.lua'), 'main')(_scriptconfig)
 				else
-					loadstring(game:HttpGet('https://raw.githubusercontent.com/MaxlaserTech/CatV6/'..readfile('catsix/profiles/commit.txt')..'/init.lua', true), 'init')(_scriptconfig)
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/hogoromoeton67/saint-v1/main/init.lua', true), 'init')(_scriptconfig)
 				end
 			]]
 			local teleportConfig = httpService:JSONEncode(license)
@@ -86,7 +86,7 @@ local function finishLoading()
 
 	if not shared.vapereload then
 		if getgenv().catrole == 'HWID MISMATCH' then
-			vape:CreateNotification('Cat', 'HWID MISMATCH, Go to the script panel to reset hwid', 25, 'alert')
+			vape:CreateNotification('SAINT', 'HWID MISMATCH, Go to the script panel to reset hwid', 25, 'alert')
 			getgenv().catrole = ''
 			task.wait(0.1)
 		end
@@ -94,7 +94,7 @@ local function finishLoading()
 			vape:CreateNotification('Finished Loading', (getgenv().catname and `Authenticated as {getgenv().catname} with {getgenv().catrole}, ` or '').. (vape.VapeButton and 'Press the button in the top right' or 'Press '..table.concat(vape.Keybind, ' + '):upper())..' to open GUI', 5)
 			task.delay(0.05 + cloneref(game:GetService('RunService')).PostSimulation:Wait(), function()
 				if shared.updated then
-					vape:CreateNotification('Cat', `Script has updated from {shared.updated} to {readfile('catrewrite/profiles/commit.txt')}`, 10, 'info')
+					vape:CreateNotification('SAINT', `Script has updated from {shared.updated} to main`, 10, 'info')
 				end
 			end)
 		end	
@@ -138,7 +138,7 @@ if not shared.VapeIndependent then
 	else
 		if not shared.VapeDeveloper then
 			local suc, res = pcall(function()
-				return game:HttpGet('https://raw.githubusercontent.com/MaxlaserTech/CatV6/'..readfile('catsix/profiles/commit.txt')..'/games/'..game.PlaceId..'.lua', true)
+				return game:HttpGet('https://raw.githubusercontent.com/hogoromoeton67/saint-v1/main/games/'..game.PlaceId..'.lua', true)
 			end)
 			if suc and res ~= '404: Not Found' then
 				loadstring(downloadFile('catsix/games/'..game.PlaceId..'.lua'), tostring(game.PlaceId))(license)
