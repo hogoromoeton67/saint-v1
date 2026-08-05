@@ -314,9 +314,8 @@ end
 
 local function downloadFile(path, func)
 	if not isfile(path) then
-		createDownloader(path)
 		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/MaxlaserTech/CatV6/'..readfile('catsix/profiles/commit.txt')..'/'..select(1, path:gsub('catsix/', '')), true)
+			return game:HttpGet('https://raw.githubusercontent.com/hogoromoeton67/saint-v1/main/'..select(1, path:gsub('catsix/', '')), true)
 		end)
 		if not suc or res == '404: Not Found' then
 			error(res)
@@ -329,10 +328,8 @@ local function downloadFile(path, func)
 	return (func or readfile)(path)
 end
 
-getcustomasset = not inputService.TouchEnabled and assetfunction and function(path)
-	return downloadFile(path, assetfunction)
-end or function(path)
-	return getcustomassets[path] or ''
+getcustomasset = function(path)
+    return 'https://raw.githubusercontent.com/hogoromoeton67/saint-v1/main/'..path
 end
 
 local function getTableSize(tab)
