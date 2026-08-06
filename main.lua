@@ -2,6 +2,7 @@
 -- Author: hogoromoeton67 | Clean pass by Axiom
 
 local license = ... or {}
+premiumUnlocked = true   -- Enable premium features
 
 -- ── Boot Guard ──────────────────────────────────────────────────────────────
 repeat task.wait() until game:IsLoaded()
@@ -41,7 +42,6 @@ local WATERMARK   = '--This watermark is used to delete the file if its cached, 
 local vape
 
 -- ── Loadstring Wrapper ───────────────────────────────────────────────────────
--- Save native before shadowing — original code called itself recursively here.
 local native_loadstring = loadstring
 local function loadstring(src, chunkname)
     local fn, err = native_loadstring(src, chunkname)
@@ -61,7 +61,6 @@ local function downloadFile(path, readFn)
             error(('[saint] fetch failed — %s: %s'):format(remotePath, tostring(data)))
         end
 
-        -- %.lua is correct — plain .lua is a pattern wildcard in find()
         if path:find('%.lua$') then
             data = WATERMARK .. data
         end
@@ -72,6 +71,15 @@ local function downloadFile(path, readFn)
     return (readFn or readfile)(path)
 end
 
+-- ── Ensure commit.txt exists (used by teleport script) ──────────────────────
+local function ensureCommitFile()
+    if not isfile('catsix/profiles/commit.txt') then
+        makefolder('catsix/profiles')
+        writefile('catsix/profiles/commit.txt', 'main')
+    end
+end
+ensureCommitFile()
+
 -- ── Teleport Script Builder ───────────────────────────────────────────────────
 local function buildTeleportScript()
     local body = [[
@@ -79,9 +87,9 @@ local function buildTeleportScript()
         if shared.VapeDeveloper then
             loadstring(readfile('catsix/main.lua'), 'main')(_scriptconfig)
         else
-           	loadstring(game:HttpGet('https://raw.githubusercontent.com/MaxlaserTech/CatV6/'..readfile('catsix/profiles/commit.txt')..'/init.lua', true), 'init')(_scriptconfig)
-				end
-			]]
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/hogoromoeton67/saint-v1/main/init.lua', true), 'init')(_scriptconfig)
+        end
+    ]]
 
     -- JSONEncode → Luau table literal (executor queue_on_teleport expects it)
     local cfg = HttpService:JSONEncode(license)
