@@ -2482,21 +2482,20 @@ function mainapi:CreateGUI()
 	addBlur(window)
 	addCorner(window)
 	makeDraggable(window)
-	local logo = Instance.new('ImageLabel')
+	
+	-- SAINT V4 logo (text instead of image)
+	local logo = Instance.new('TextLabel')
 	logo.Name = 'VapeLogo'
-	logo.Size = UDim2.fromOffset(62, 18)
+	logo.Size = UDim2.fromOffset(90, 18)
 	logo.Position = UDim2.fromOffset(11, 10)
 	logo.BackgroundTransparency = 1
-	logo.Image = getcustomasset('catsix/assets/new/guivape.png')
-	logo.ImageColor3 = select(3, uipallet.Main:ToHSV()) > 0.5 and uipallet.Text or Color3.new(1, 1, 1)
+	logo.Text = 'SAINT V4'
+	logo.TextColor3 = uipallet.Text
+	logo.TextSize = 16
+	logo.FontFace = uipallet.FontSemiBold
+	logo.TextXAlignment = Enum.TextXAlignment.Left
 	logo.Parent = window
-	local logov4 = Instance.new('ImageLabel')
-	logov4.Name = 'V4Logo'
-	logov4.Size = UDim2.fromOffset(28, 16)
-	logov4.Position = UDim2.new(1, 1, 0, 1)
-	logov4.BackgroundTransparency = 1
-	logov4.Image = getcustomasset('catsix/assets/new/guiv4.png')
-	logov4.Parent = logo
+
 	local children = Instance.new('Frame')
 	children.Name = 'Children'
 	children.Size = UDim2.new(1, 0, 1, -33)
@@ -2561,7 +2560,7 @@ function mainapi:CreateGUI()
 	settingsversion.Size = UDim2.new(1, 0, 0, 16)
 	settingsversion.Position = UDim2.new(0, 0, 1, -16)
 	settingsversion.BackgroundTransparency = 1
-	settingsversion.Text = 'Vape '..mainapi.Version..' '..(
+	settingsversion.Text = 'SAINT '..mainapi.Version..' '..(
 		isfile('catsix/profiles/commit.txt') and readfile('catsix/profiles/commit.txt'):sub(1, 6) or ''
 	)..' '
 	settingsversion.TextColor3 = color.Dark(uipallet.Text, 0.43)
@@ -5448,7 +5447,7 @@ function mainapi:CreatePrompt(promptsettings)
 	title.Position = UDim2.fromOffset(44, 20)
 	title.ZIndex = 12
 	title.BackgroundTransparency = 1
-	title.Text = promptsettings.Title or 'Vape'
+	title.Text = promptsettings.Title or 'SAINT V4'
 	title.TextXAlignment = Enum.TextXAlignment.Left
 	title.TextColor3 = uipallet.Text
 	title.TextSize = 14
@@ -5542,7 +5541,7 @@ function mainapi:Load(skipgui, profile)
 		guidata = loadJson('catsix/profiles/'..game.GameId..'.gui.txt')
 		if not guidata then
 			guidata = {Categories = {}}
-			self:CreateNotification('Vape', 'Failed to load GUI settings.', 10, 'alert')
+			self:CreateNotification('SAINT V4', 'Failed to load GUI settings.', 10, 'alert')
 			savecheck = false
 		end
 
@@ -5589,7 +5588,7 @@ function mainapi:Load(skipgui, profile)
 		local savedata = loadJson('catsix/profiles/'..self.Profile..self.Place..'.txt')
 		if not savedata then
 			savedata = {Categories = {}, Modules = {}, Legit = {}}
-			self:CreateNotification('Vape', 'Failed to load '..self.Profile..' profile.', 10, 'alert')
+			self:CreateNotification('SAINT V4', 'Failed to load '..self.Profile..' profile.', 10, 'alert')
 			savecheck = false
 		end
 
@@ -5722,7 +5721,7 @@ function mainapi:Load(skipgui, profile)
 
 		if guipane then
 			guipane:CreateToggle({
-				Name = 'Hide catvape button',
+				Name = 'Hide saint button',
 				Default = hide or false,
 				Function = function(call)
 					button.BackgroundTransparency = call and 1 or 0.35
@@ -6133,7 +6132,7 @@ Profiles:CreateButton({
 			loadstring(game:HttpGet('https://raw.githubusercontent.com/MaxlaserTech/CatV6/'..readfile('catsix/profiles/commit.txt')..'/init.lua', true))(license)
 		end
 	end,
-	Tooltip = 'This will set your profile to the default settings of Cat Vape'
+	Tooltip = 'This will set your profile to the default settings of SAINT V4'
 })	
 
 --[[
@@ -6171,7 +6170,7 @@ general:CreateButton({
 	Function = function()
 		mainapi:Uninject()
 	end,
-	Tooltip = 'Removes vape from the current game'
+	Tooltip = 'Removes SAINT V4 from the current game'
 })
 general:CreateButton({
 	Name = 'Reinject',
@@ -6183,7 +6182,7 @@ general:CreateButton({
 			loadstring(game:HttpGet('https://raw.githubusercontent.com/MaxlaserTech/CatV6/'..readfile('catsix/profiles/commit.txt')..'/init.lua', true))()
 		end
 	end,
-	Tooltip = 'Reloads vape for debugging purposes'
+	Tooltip = 'Reloads SAINT V4 for debugging purposes'
 })
 
 --[[
@@ -6292,7 +6291,7 @@ guipane:CreateDropdown({
 			end
 		end
 	end,
-	Tooltip = 'new - The newest vape theme to since v4.05\nold - The vape theme pre v4.05\nrise - Rise 6.0'
+	Tooltip = 'new - The newest SAINT V4 theme to since v4.05\nold - The SAINT V4 theme pre v4.05\nrise - Rise 6.0'
 })
 mainapi.RainbowMode = guipane:CreateDropdown({
 	Name = 'Rainbow Mode',
@@ -6480,7 +6479,7 @@ local textguianimations = textgui:CreateToggle({
 })
 local textguiwatermark = textgui:CreateToggle({
 	Name = 'Watermark',
-	Tooltip = 'Renders a vape watermark',
+	Tooltip = 'Renders a SAINT V4 watermark',
 	Function = function()
 		mainapi:UpdateTextGUI()
 	end
@@ -7278,7 +7277,7 @@ function mainapi:UpdateGUI(hue, sat, val, default)
 
 	for i, v in mainapi.Categories do
 		if i == 'Main' then
-			v.Object.VapeLogo.V4Logo.ImageColor3 = Color3.fromHSV(hue, sat, val)
+			-- No more V4Logo image, so skip it
 			for _, button in v.Buttons do
 				if button.Enabled then
 					button.Object.TextColor3 = rainbow and Color3.fromHSV(mainapi:Color((hue - (button.Index * 0.025)) % 1)) or Color3.fromHSV(hue, sat, val)
@@ -7445,7 +7444,7 @@ if shared.VapePresetInstall then
 		prompted = true
 		mainapi:CreatePrompt({
 			Title = 'Preset configs',
-			Text = 'It looks like this is your first time using Vape. Would you like to download the preset configs? They come with recommended settings for each supported game.',
+			Text = 'It looks like this is your first time using SAINT V4. Would you like to download the preset configs? They come with recommended settings for each supported game.',
 			Confirm = 'Download',
 			Cancel = 'No thanks',
 			Function = function(result)
@@ -7454,9 +7453,9 @@ if shared.VapePresetInstall then
 				if not result or not install then return end
 				task.spawn(function()
 					if install() then
-						mainapi:CreateNotification('Vape', 'Preset configs installed, rejoin to use them.', 8)
+						mainapi:CreateNotification('SAINT V4', 'Preset configs installed, rejoin to use them.', 8)
 					else
-						mainapi:CreateNotification('Vape', 'Failed to download preset configs.', 8, 'alert')
+						mainapi:CreateNotification('SAINT V4', 'Failed to download preset configs.', 8, 'alert')
 					end
 				end)
 			end
