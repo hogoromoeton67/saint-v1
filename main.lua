@@ -79,9 +79,9 @@ local function buildTeleportScript()
         if shared.VapeDeveloper then
             loadstring(readfile('catsix/main.lua'), 'main')(_scriptconfig)
         else
-            loadstring(game:HttpGet('https://raw.githubusercontent.com/hogoromoeton67/saint-v1/main/init.lua', true), 'init')(_scriptconfig)
-        end
-    ]]
+           	loadstring(game:HttpGet('https://raw.githubusercontent.com/MaxlaserTech/CatV6/'..readfile('catsix/profiles/commit.txt')..'/init.lua', true), 'init')(_scriptconfig)
+				end
+			]]
 
     -- JSONEncode → Luau table literal (executor queue_on_teleport expects it)
     local cfg = HttpService:JSONEncode(license)
