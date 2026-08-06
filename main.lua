@@ -1,5 +1,3 @@
-local CollectionService
-
 local license = ... or {}
 premiumUnlocked = true
 local REPO = "https://raw.githubusercontent.com/hogoromoeton67/saint-v1/main/"
@@ -82,7 +80,7 @@ local teleportService = game:GetService("TeleportService")
 
 local function notify(title, text, duration, kind)
     if vape and vape.CreateNotification then
-        vape:CreateNotification(title or "Cat", text or "", duration or 10, kind or "alert")
+        vape:CreateNotification(title or "SAINT", text or "", duration or 10, kind or "alert")
     end
 end
 
@@ -145,74 +143,8 @@ if vape.Place == 6872274481 then
     targetinfo = vape.Libraries.targetinfo
     prediction = vape.Libraries.prediction
 end
-local BYTE_TO_CHAR = {}
-for byte = 0, 255 do
-    BYTE_TO_CHAR[byte] = string.char(byte)
-end
-local Crypto = {}
-Crypto.hmac = {}
-Crypto.aes = {}
-local AES_SBOX = {
-    99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118,
-    202, 130, 201, 125, 250, 89, 71, 240, 173, 212, 162, 175, 156, 164, 114, 192,
-    183, 253, 147, 38, 54, 63, 247, 204, 52, 165, 229, 241, 113, 216, 49, 21,
-    4, 199, 35, 195, 24, 150, 5, 154, 7, 18, 128, 226, 235, 39, 178, 117,
-    9, 131, 44, 26, 27, 110, 90, 160, 82, 59, 214, 179, 41, 227, 47, 132,
-    83, 209, 0, 237, 32, 252, 177, 91, 106, 203, 190, 57, 74, 76, 88, 207,
-    208, 239, 170, 251, 67, 77, 51, 133, 69, 249, 2, 127, 80, 60, 159, 168,
-    81, 163, 64, 143, 146, 157, 56, 245, 188, 182, 218, 33, 16, 255, 243, 210,
-    205, 12, 19, 236, 95, 151, 68, 23, 196, 167, 126, 61, 100, 93, 25, 115,
-    96, 129, 79, 220, 34, 42, 144, 136, 70, 238, 184, 20, 222, 94, 11, 219,
-    224, 50, 58, 10, 73, 6, 36, 92, 194, 211, 172, 98, 145, 149, 228, 121,
-    231, 200, 55, 109, 141, 213, 78, 169, 108, 86, 244, 234, 101, 122, 174, 8,
-    186, 120, 37, 46, 28, 166, 180, 198, 232, 221, 116, 31, 75, 189, 139, 138,
-    112, 62, 181, 102, 72, 3, 246, 14, 97, 53, 87, 185, 134, 193, 29, 158,
-    225, 248, 152, 17, 105, 217, 142, 148, 155, 30, 135, 233, 206, 85, 40, 223,
-    140, 161, 137, 13, 191, 230, 66, 104, 65, 153, 45, 15, 176, 84, 187, 22,
-}
-local AES_RCON = { 1, 2, 4, 8, 16, 32, 64, 128, 27, 54 }
-local PAYLOAD_FIELD_ALIASES = {}
 
-PAYLOAD_FIELD_ALIASES.ciphertext = {"h3", "h4", "xt", "cx", "l5", "cn", "FOCAT WHAT ME"}
-PAYLOAD_FIELD_ALIASES.iv = {"xyq", "XD LOL", "xy43", "1dn", "o26", "s61", "sss", "ah4"}
-PAYLOAD_FIELD_ALIASES.tag = {"ta", "sl", "b33", "l27", "dec", "rin", "linux"}
-PAYLOAD_FIELD_ALIASES.wrappedkey = {"316", "xt213", "2315", "x25", "xsww", "326", "ps4"}
-PAYLOAD_FIELD_ALIASES.yea = {"yea", "read me", "stop debug"}
-PAYLOAD_FIELD_ALIASES.keytag = {"bnn", "bnc", "x2l", "ldb", "dbw", "xlg"}
-PAYLOAD_FIELD_ALIASES.keyiv = {"asx", "lkh", "lxg", "ngi", "nin", "c31"}
-PAYLOAD_FIELD_ALIASES.masterkey = {"xk9", "mk2", "zp7", "qw3", "rt8", "ux5", "vb1"}
-local KEY_PROGRAM_SOURCE = {9, 1, 6, 2, 1, 7, 10, 2}
-local function appendValue(list, value)
-    list[#list + 1] = value
-end
-local function tableAddressChecksum()
-    local address = tostring({})
-    local total = 0
-    for index = 6, #address do
-        local byte = address:byte(index) or 0
-        total = (total + byte * index) % 2147483648
-    end
-    return total
-end
-local function seededRandom()
-    local seed = tableAddressChecksum() % 2147483648
-    math.randomseed(seed)
-    return math.random
-end
-local DECOY_STRINGS = {
-    "all rights reserved to catvape.dev",
-    "tampering with this message is prohibited",
-    "<https://catvape.dev>"
-}
-
-for _ = 1, 13 do
-    appendValue(DECOY_STRINGS, ("%d.%d.%d.%d"):format(
-        seededRandom()(0, 255),
-        seededRandom()(0, 255),
-        seededRandom()(0, 255),
-        seededRandom()(0, 255)
-    ))
-end
+-- Silent Aura
 local silentAura
 local auraTargets
 local aimSpeedSlider
@@ -238,8 +170,7 @@ targetAdornment.Size = Vector3.new(3, 5, 3)
 targetAdornment.CFrame = CFrame.new(0, -0.5, 0)
 targetAdornment.ZIndex = 0
 targetAdornment.Parent = vape.gui
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
+
 local killauraRequireMouseDownToggle
 local killauraAttackableCheckToggle
 local killauraGuiCheckToggle
@@ -265,1361 +196,7 @@ task.spawn(function()
     swordHitRemote = bedwars.Handler:Get("SwordHit")
     swordSwingMissRemote = bedwars.Handler:Get("SwordSwingMiss")
 end)
-local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("UserInputService")
-local function run(callback)
-    callback()
-end
-local function toStringValue(value)
-    return ("%*"):format(value)
-end
-local function repeatString(text, count, separator)
-    local source = "" .. text
-    local total = count + 0
-    if total <= 0 then
-        return ""
-    end
-    local glue = (separator and ("" .. separator)) or ""
-    local out = source
-    for _ = 2, total do
-        out = out .. glue .. source
-    end
-    return out
-end
-local function byteOf(text, index)
-    return string.byte(text, index or 1)
-end
-local function formatString(pattern, ...)
-    return string.format(pattern, ...)
-end
-local function bytesToString(...)
-    local bytes = { ... }
-    local count = #bytes
-    if count == 0 then
-        return ""
-    end
-    if count == 1 then
-        return BYTE_TO_CHAR[bytes[1]] or ""
-    end
-    local out = ""
-    for i = 1, count do
-        local char = BYTE_TO_CHAR[bytes[i]]
-        if char then
-            out = out .. char
-        end
-    end
-    return out
-end
-local function quickSortRange(list, low, high, comparator)
-    if high <= low then
-        return
-    end
-    local middle = low + (high - low) / 2
-    local pivot = list[middle - middle % 1]
-    local left = low
-    local right = high
-    while left <= right do
-        while comparator(list[left], pivot) do
-            left = left + 1
-        end
-        while comparator(pivot, list[right]) do
-            right = right - 1
-        end
-        if left <= right then
-            local swapped = list[left]
-            list[left] = list[right]
-            list[right] = swapped
-            left = left + 1
-            right = right - 1
-        end
-    end
-    quickSortRange(list, low, right, comparator)
-    quickSortRange(list, left, high, comparator)
-end
-local function sortList(list, comparator)
-    if not comparator then
-        comparator = function(a, b)
-            return a < b
-        end
-    end
-    quickSortRange(list, 1, #list, comparator)
-end
-local function arrayNext(list, index)
-    local nextIndex = index + 1
-    local value = list[nextIndex]
-    if value ~= nil then
-        return nextIndex, value
-    end
-end
-local function arrayPairs(list)
-    return arrayNext, list, 0
-end
-local function indexOfValue(list, value, from)
-    for i = from or 1, #list do
-        if list[i] == value then
-            return i
-        end
-    end
-end
-local function floorOf(number)
-    return number - number % 1
-end
-local function absOf(number)
-    if number < 0 then
-        return -number
-    end
-    return number
-end
-local function joinStrings(list, separator)
-    local out = ""
-    for index, value in next, list do
-        local glue = ""
-        if separator and index ~= #list then
-            glue = separator
-        end
-        out = out .. value .. glue
-    end
-    return out
-end
-local function parseInteger(text)
-    local digits = {
-        ["0"] = 0,
-        ["1"] = 1,
-        ["2"] = 2,
-        ["3"] = 3,
-        ["4"] = 4,
-        ["5"] = 5,
-        ["6"] = 6,
-        ["7"] = 7,
-        ["8"] = 8,
-        ["9"] = 9,
-    }
-    local total = 0
-    local negative = false
-    for index, char in next, text:split("") do
-        if index == 1 and char == "-" then
-            negative = true
-        else
-            local digit = digits[char]
-            if digit == nil then
-                return nil
-            end
-            total = total * 10 + digit
-        end
-    end
-    if negative then
-        return -total
-    end
-    return total
-end
-local function jsonEncode(value, pretty, depth)
-    local valueType = type(value)
 
-    if value == nil then
-        return "null"
-    end
-
-    if valueType == "boolean" then
-        return toStringValue(value)
-    end
-
-    if valueType == "number" then
-        if absOf(value) == math.huge then
-            return "null"
-        end
-        if value ~= floorOf(value) or not (absOf(value) < 1000000000000000) then
-            return formatString("%.14g", value)
-        end
-        return formatString("%d", value)
-    end
-
-    if valueType == "string" then
-        local escaped = value:gsub("\\", "\\\\")
-        escaped = escaped:gsub("\"", "\\\"")
-        escaped = escaped:gsub("\n", "\\n")
-        escaped = escaped:gsub("\r", "\\r")
-        escaped = escaped:gsub("\t", "\\t")
-        escaped = escaped:gsub("%c", function(control)
-            return formatString("\\u%04x", byteOf(control))
-        end)
-        return "\"" .. escaped .. "\""
-    end
-
-    if valueType ~= "table" then
-        return
-    end
-
-    local isArray = true
-    local maxIndex = 0
-    for key in next, value do
-        if type(key) ~= "number" then
-            isArray = false
-            break
-        end
-        if key ~= floorOf(key) or not (1 <= key) then
-            isArray = false
-            break
-        end
-        if maxIndex < key then
-            maxIndex = key
-        end
-    end
-    if maxIndex ~= #value then
-        isArray = false
-    end
-
-    if next(value) == nil then
-        return (isArray and "[]") or "{}"
-    end
-
-    local childDepth = depth + 1
-    local innerPad = (pretty and repeatString("  ", childDepth)) or ""
-    local outerPad = (pretty and repeatString("  ", depth)) or ""
-    local entrySeparator = (pretty and ",\n") or ","
-    local parts = {}
-
-    if isArray then
-        for _, item in arrayPairs(value) do
-            appendValue(parts, innerPad .. jsonEncode(item, pretty, childDepth))
-        end
-    else
-        local keys = {}
-        for key in next, value do
-            appendValue(keys, key)
-        end
-        sortList(keys, function(a, b)
-            return toStringValue(a) < toStringValue(b)
-        end)
-        local keySeparator = (pretty and ": ") or ":"
-        for _, key in arrayPairs(keys) do
-            local encodedKey = jsonEncode(toStringValue(key), pretty, childDepth)
-            local encodedValue = jsonEncode(value[key], pretty, childDepth)
-            appendValue(parts, innerPad .. encodedKey .. keySeparator .. encodedValue)
-        end
-    end
-
-    local open
-    local close
-    if isArray then
-        open = (pretty and "[\n") or "["
-        close = (pretty and ("\n" .. outerPad .. "]")) or "]"
-    else
-        open = (pretty and "{\n") or "{"
-        close = (pretty and ("\n" .. outerPad .. "}")) or "}"
-    end
-
-    return open .. joinStrings(parts, entrySeparator) .. close
-end
-local function createJsonParser(source)
-    local position = 1
-    local parseValue
-
-    local function peek()
-        return source:sub(position, position)
-    end
-
-    local function advance(count)
-        position = position + (count or 1)
-    end
-
-    local function skipWhitespace()
-        while position <= #source do
-            local char = source:sub(position, position)
-            if not char:match("%s") then
-                break
-            end
-            position = position + 1
-        end
-    end
-
-    local function expect(expected)
-        skipWhitespace()
-        if source:sub(position, position) ~= expected then
-            error(string.format("[JSON] Expected '%s' at pos %d, got '%s'", expected, position, source:sub(position, position)))
-        end
-        advance()
-    end
-
-    local function parseString()
-        expect("\"")
-        local parts = {}
-        local escapes = {
-            ["\""] = "\"",
-            ["\\"] = "\\",
-            ["/"] = "/",
-            n = "\n",
-            r = "\r",
-            t = "\t",
-            b = "\b",
-            f = "\f",
-        }
-        while position <= #source do
-            local char = peek()
-            if char == "\"" then
-                advance()
-                return table.concat(parts)
-            elseif char ~= "\\" then
-                table.insert(parts, char)
-                advance()
-            else
-                advance()
-                local escape = peek()
-                advance()
-                if escapes[escape] then
-                    table.insert(parts, escapes[escape])
-                elseif escape ~= "u" then
-                    error("[JSON] Unknown escape: \\" .. escape)
-                else
-                    local hex = source:sub(position, position + 3)
-                    advance(4)
-                    local codepoint = tonumber(hex, 16)
-                    if not codepoint then
-                        error("[JSON] Invalid unicode: \\u" .. hex)
-                    end
-                    if codepoint < 128 then
-                        table.insert(parts, string.char(codepoint))
-                    elseif codepoint < 2048 then
-                        table.insert(parts, string.char(192 + math.floor(codepoint / 64), 128 + codepoint % 64))
-                    else
-                        table.insert(parts, string.char(224 + math.floor(codepoint / 4096), 128 + math.floor(codepoint % 4096 / 64), 128 + codepoint % 64))
-                    end
-                end
-            end
-        end
-        error("[JSON] Unterminated string")
-    end
-
-    local function parseNumber()
-        local start = position
-        if peek() == "-" then
-            advance()
-        end
-        while position <= #source and peek():match("%d") do
-            advance()
-        end
-        if peek() == "." then
-            advance()
-            while position <= #source and peek():match("%d") do
-                advance()
-            end
-        end
-        if peek():lower() == "e" then
-            advance()
-            if peek() == "+" then
-                advance()
-            elseif peek() == "-" then
-                advance()
-            end
-            while position <= #source and peek():match("%d") do
-                advance()
-            end
-        end
-        local value = tonumber(source:sub(start, position - 1))
-        if not value then
-            error("[JSON] Invalid number at pos " .. start)
-        end
-        return value
-    end
-
-    local function parseArray()
-        expect("[")
-        skipWhitespace()
-        local items = {}
-        if peek() ~= "]" then
-            while true do
-                table.insert(items, parseValue())
-                skipWhitespace()
-                if peek() == "]" then
-                    break
-                end
-                expect(",")
-            end
-        end
-        advance()
-        return items
-    end
-
-    local function parseObject()
-        expect("{")
-        skipWhitespace()
-        local object = {}
-        if peek() ~= "}" then
-            while true do
-                skipWhitespace()
-                local key = parseString()
-                expect(":")
-                object[key] = parseValue()
-                skipWhitespace()
-                if peek() == "}" then
-                    break
-                end
-                expect(",")
-            end
-        end
-        advance()
-        return object
-    end
-
-    parseValue = function()
-        skipWhitespace()
-        local char = peek()
-        if char == "\"" then
-            return parseString()
-        end
-        if char == "{" then
-            return parseObject()
-        end
-        if char == "[" then
-            return parseArray()
-        end
-        if char == "t" and source:sub(position, position + 3) == "true" then
-            advance(4)
-            return true
-        end
-        if char == "f" and source:sub(position, position + 4) == "false" then
-            advance(5)
-            return false
-        end
-        if char == "n" and source:sub(position, position + 3) == "null" then
-            advance(4)
-            return nil
-        end
-        if char == "-" or char:match("%d") then
-            return parseNumber()
-        end
-        error(string.format("[JSON] Unexpected '%s' at pos %d", char, position))
-    end
-
-    return parseValue, function()
-        return position
-    end
-end
-local function jsonDecode(text)
-    assert(type(text) == "string", "[JSON] decode() expects a string")
-    local parseValue, getPosition = createJsonParser(text)
-    local value = parseValue()
-    local trailing = text:sub(getPosition()):match("^%s*(.-)%s*$")
-    return value
-end
-local bit = bit32
-
-local function bxor(a, b)
-    return bit.bxor(a, b)
-end
-
-local function band(a, b)
-    return bit.band(a, b)
-end
-
-local function bnot(value)
-    return bit.bnot(value)
-end
-
-local function rshift(value, amount)
-    return bit.rshift(value, amount)
-end
-
-local function lshift(value, amount)
-    return bit.lshift(value, amount)
-end
-local function subWord(word)
-    return bxor(
-        bxor(
-            bxor(
-                lshift(AES_SBOX[band(rshift(word, 24), 255) + 1], 24),
-                lshift(AES_SBOX[band(rshift(word, 16), 255) + 1], 16)
-            ),
-            lshift(AES_SBOX[band(rshift(word, 8), 255) + 1], 8)
-        ),
-        AES_SBOX[band(word, 255) + 1]
-    )
-end
-local function rotWord(word)
-    return bxor(
-        bxor(
-            bxor(
-                lshift(band(rshift(word, 16), 255), 24),
-                lshift(band(rshift(word, 8), 255), 16)
-            ),
-            lshift(band(word, 255), 8)
-        ),
-        band(rshift(word, 24), 255)
-    )
-end
-local function expandKey(keyBytes)
-    local schedule = {}
-    local wordCount = #keyBytes / 4
-    local rounds = wordCount + 6
-    for index = 0, wordCount - 1 do
-        schedule[index] = bxor(
-            bxor(
-                bxor(
-                    lshift(keyBytes[index * 4 + 1], 24),
-                    lshift(keyBytes[index * 4 + 2], 16)
-                ),
-                lshift(keyBytes[index * 4 + 3], 8)
-            ),
-            keyBytes[index * 4 + 4]
-        )
-    end
-    for index = wordCount, 4 * (rounds + 1) - 1 do
-        local temp = schedule[index - 1]
-        if index % wordCount == 0 then
-            temp = bxor(subWord(rotWord(temp)), lshift(AES_RCON[index / wordCount], 24))
-        elseif wordCount > 6 and index % wordCount == 4 then
-            temp = subWord(temp)
-        end
-        schedule[index] = bxor(schedule[index - wordCount], temp)
-    end
-    return schedule, rounds
-end
-local function addRoundKey(state, roundKey)
-    for index = 0, 15 do
-        state[index + 1] = bxor(state[index + 1], roundKey[index + 1])
-    end
-end
-local function subBytes(state)
-    for index = 1, 16 do
-        state[index] = AES_SBOX[state[index] + 1]
-    end
-end
-local function shiftRows(state)
-    local carry = state[2]
-    state[2] = state[6]
-    state[6] = state[10]
-    state[10] = state[14]
-    state[14] = carry
-
-    carry = state[3]
-    state[3] = state[11]
-    state[11] = carry
-
-    carry = state[7]
-    state[7] = state[15]
-    state[15] = carry
-
-    carry = state[4]
-    state[4] = state[16]
-    state[16] = state[12]
-    state[12] = state[8]
-    state[8] = carry
-end
-local function xtime(value)
-    local doubled = lshift(value, 1)
-    if value >= 128 then
-        doubled = bxor(doubled, 27)
-    end
-    return band(doubled, 255)
-end
-local function mixColumns(state)
-    for column = 0, 3 do
-        local b0 = state[column * 4 + 1]
-        local b1 = state[column * 4 + 2]
-        local b2 = state[column * 4 + 3]
-        local b3 = state[column * 4 + 4]
-        local all = bxor(bxor(bxor(b0, b1), b2), b3)
-        state[column * 4 + 1] = bxor(bxor(b0, xtime(bxor(b0, b1))), all)
-        state[column * 4 + 2] = bxor(bxor(b1, xtime(bxor(b1, b2))), all)
-        state[column * 4 + 3] = bxor(bxor(b2, xtime(bxor(b2, b3))), all)
-        state[column * 4 + 4] = bxor(bxor(b3, xtime(bxor(b3, b0))), all)
-    end
-end
-local function encryptBlock(block, schedule, rounds)
-    local state = {}
-    for index = 1, 16 do
-        state[index] = block[index]
-    end
-
-    local roundKey = {}
-    for index = 1, 16 do
-        local word = math.floor((index - 1) / 4)
-        local byte = (index - 1) % 4
-        roundKey[index] = band(rshift(schedule[word], (3 - byte) * 8), 255)
-    end
-    addRoundKey(state, roundKey)
-
-    for round = 1, rounds - 1 do
-        subBytes(state)
-        shiftRows(state)
-        mixColumns(state)
-        for index = 1, 16 do
-            local word = math.floor((index - 1) / 4 + round * 4)
-            local byte = (index - 1) % 4
-            roundKey[index] = band(rshift(schedule[word], (3 - byte) * 8), 255)
-        end
-        addRoundKey(state, roundKey)
-    end
-
-    subBytes(state)
-    shiftRows(state)
-    for index = 1, 16 do
-        local word = math.floor((index - 1) / 4 + rounds * 4)
-        local byte = (index - 1) % 4
-        roundKey[index] = band(rshift(schedule[word], (3 - byte) * 8), 255)
-    end
-    addRoundKey(state, roundKey)
-
-    return state
-end
-local function incrementCounter(counter)
-    for index = 16, 1, -1 do
-        counter[index] = counter[index] + 1
-        if counter[index] <= 255 then
-            return
-        end
-        counter[index] = 0
-    end
-end
-local function gmul(a, b)
-    local product = 0
-    for _ = 0, 7 do
-        if band(b, 1) ~= 0 then
-            product = bxor(product, a)
-        end
-        local highBitSet = band(a, 128) ~= 0
-        a = lshift(a, 1)
-        if highBitSet then
-            a = bxor(a, 27)
-        end
-        a = band(a, 255)
-        b = rshift(b, 1)
-    end
-    return product
-end
-local function bor(a, b)
-    return bnot(band(bnot(a), bnot(b)))
-end
-local function ghashMultiply(hashSubkey, accumulator, block)
-    for index = 1, 16 do
-        accumulator[index] = bxor(accumulator[index], block[index])
-    end
-
-    local result = {}
-    for index = 1, 16 do
-        result[index] = 0
-    end
-
-    local shifted = {}
-    for index = 1, 16 do
-        shifted[index] = hashSubkey[index]
-    end
-
-    for bitIndex = 1, 128 do
-        local byteIndex = math.floor((bitIndex - 1) / 8) + 1
-        local bitOffset = 7 - (bitIndex - 1) % 8
-        if band(rshift(accumulator[byteIndex], bitOffset), 1) ~= 0 then
-            for index = 1, 16 do
-                result[index] = bxor(result[index], shifted[index])
-            end
-        end
-        local lowBit = band(shifted[16], 1)
-        for index = 16, 2, -1 do
-            shifted[index] = bor(rshift(shifted[index], 1), lshift(band(shifted[index - 1], 1), 7))
-        end
-        shifted[1] = rshift(shifted[1], 1)
-        if lowBit ~= 0 then
-            shifted[1] = bxor(shifted[1], 225)
-        end
-    end
-
-    for index = 1, 16 do
-        accumulator[index] = result[index]
-    end
-end
-local function gcmEncrypt(key, iv, plaintext, additionalData)
-    if #key ~= 32 then
-        error("Key must be 32 bytes for AES-256")
-    end
-
-    local schedule, rounds = expandKey(key)
-
-    local zeroBlock = {}
-    for index = 1, 16 do
-        zeroBlock[index] = 0
-    end
-    local hashSubkey = encryptBlock(zeroBlock, schedule, rounds)
-
-    local initialCounter = {}
-    if #iv ~= 12 then
-        for index = 1, 16 do
-            initialCounter[index] = 0
-        end
-
-        local ivBlocks = math.ceil(#iv / 16)
-        for blockIndex = 1, ivBlocks do
-            local block = {}
-            for index = 1, 16 do
-                local position = (blockIndex - 1) * 16 + index
-                block[index] = (position <= #iv and iv[position]) or 0
-            end
-            ghashMultiply(hashSubkey, initialCounter, block)
-        end
-
-        local lengthBlock = {}
-        for index = 1, 8 do
-            lengthBlock[index] = 0
-        end
-        local ivBitLength = #iv * 8
-        for index = 0, 7 do
-            lengthBlock[9 + index] = band(rshift(ivBitLength, (7 - index) * 8), 255)
-        end
-        ghashMultiply(hashSubkey, initialCounter, lengthBlock)
-    else
-        for index = 1, 12 do
-            initialCounter[index] = iv[index]
-        end
-        initialCounter[13] = 0
-        initialCounter[14] = 0
-        initialCounter[15] = 0
-        initialCounter[16] = 1
-    end
-
-    local counter = {}
-    for index = 1, 16 do
-        counter[index] = initialCounter[index]
-    end
-    incrementCounter(counter)
-
-    local ciphertext = {}
-    local plaintextBlocks = math.ceil(#plaintext / 16)
-    for blockIndex = 1, plaintextBlocks do
-        local keystream = encryptBlock(counter, schedule, rounds)
-        for index = 1, 16 do
-            local position = (blockIndex - 1) * 16 + index
-            if position <= #plaintext then
-                ciphertext[position] = bxor(plaintext[position], keystream[index])
-            end
-        end
-        if blockIndex < plaintextBlocks then
-            incrementCounter(counter)
-        end
-    end
-
-    local accumulator = {}
-    for index = 1, 16 do
-        accumulator[index] = 0
-    end
-
-    if additionalData then
-        local aadBlocks = math.ceil(#additionalData / 16)
-        for blockIndex = 1, aadBlocks do
-            local block = {}
-            for index = 1, 16 do
-                local position = (blockIndex - 1) * 16 + index
-                block[index] = (position <= #additionalData and additionalData[position]) or 0
-            end
-            ghashMultiply(hashSubkey, accumulator, block)
-        end
-    end
-
-    local cipherBlocks = math.ceil(#ciphertext / 16)
-    for blockIndex = 1, cipherBlocks do
-        local block = {}
-        for index = 1, 16 do
-            local position = (blockIndex - 1) * 16 + index
-            block[index] = (position <= #ciphertext and ciphertext[position]) or 0
-        end
-        ghashMultiply(hashSubkey, accumulator, block)
-    end
-
-    local lengthBlock = {}
-    local aadBitLength = (additionalData and #additionalData * 8) or 0
-    local cipherBitLength = #ciphertext * 8
-    for index = 0, 7 do
-        lengthBlock[1 + index] = band(rshift(aadBitLength, (7 - index) * 8), 255)
-        lengthBlock[9 + index] = band(rshift(cipherBitLength, (7 - index) * 8), 255)
-    end
-    ghashMultiply(hashSubkey, accumulator, lengthBlock)
-
-    local tag = encryptBlock(initialCounter, schedule, rounds)
-    for index = 1, 16 do
-        tag[index] = bxor(tag[index], accumulator[index])
-    end
-
-    return ciphertext, tag
-end
-local function gcmDecrypt(key, iv, ciphertext, tag, additionalData)
-    if #key ~= 32 then
-        error("Key must be 32 bytes for AES-256")
-    end
-
-    local schedule, rounds = expandKey(key)
-
-    local zeroBlock = {}
-    for index = 1, 16 do
-        zeroBlock[index] = 0
-    end
-    local hashSubkey = encryptBlock(zeroBlock, schedule, rounds)
-
-    local initialCounter = {}
-    if #iv ~= 12 then
-        for index = 1, 16 do
-            initialCounter[index] = 0
-        end
-
-        local ivBlocks = math.ceil(#iv / 16)
-        for blockIndex = 1, ivBlocks do
-            local block = {}
-            for index = 1, 16 do
-                local position = (blockIndex - 1) * 16 + index
-                block[index] = (position <= #iv and iv[position]) or 0
-            end
-            ghashMultiply(hashSubkey, initialCounter, block)
-        end
-
-        local lengthBlock = {}
-        for index = 1, 8 do
-            lengthBlock[index] = 0
-        end
-        local ivBitLength = #iv * 8
-        for index = 0, 7 do
-            lengthBlock[9 + index] = band(rshift(ivBitLength, (7 - index) * 8), 255)
-        end
-        ghashMultiply(hashSubkey, initialCounter, lengthBlock)
-    else
-        for index = 1, 12 do
-            initialCounter[index] = iv[index]
-        end
-        initialCounter[13] = 0
-        initialCounter[14] = 0
-        initialCounter[15] = 0
-        initialCounter[16] = 1
-    end
-
-    local accumulator = {}
-    for index = 1, 16 do
-        accumulator[index] = 0
-    end
-
-    if additionalData then
-        local aadBlocks = math.ceil(#additionalData / 16)
-        for blockIndex = 1, aadBlocks do
-            local block = {}
-            for index = 1, 16 do
-                local position = (blockIndex - 1) * 16 + index
-                block[index] = (position <= #additionalData and additionalData[position]) or 0
-            end
-            ghashMultiply(hashSubkey, accumulator, block)
-        end
-    end
-
-    local cipherBlocks = math.ceil(#ciphertext / 16)
-    for blockIndex = 1, cipherBlocks do
-        local block = {}
-        for index = 1, 16 do
-            local position = (blockIndex - 1) * 16 + index
-            block[index] = (position <= #ciphertext and ciphertext[position]) or 0
-        end
-        ghashMultiply(hashSubkey, accumulator, block)
-    end
-
-    local lengthBlock = {}
-    local aadBitLength = (additionalData and #additionalData * 8) or 0
-    local cipherBitLength = #ciphertext * 8
-    for index = 0, 7 do
-        lengthBlock[1 + index] = band(rshift(aadBitLength, (7 - index) * 8), 255)
-        lengthBlock[9 + index] = band(rshift(cipherBitLength, (7 - index) * 8), 255)
-    end
-    ghashMultiply(hashSubkey, accumulator, lengthBlock)
-
-    local expectedTag = encryptBlock(initialCounter, schedule, rounds)
-    for index = 1, 16 do
-        expectedTag[index] = bxor(expectedTag[index], accumulator[index])
-    end
-
-    local tagMatches = true
-    for index = 1, 16 do
-        if expectedTag[index] ~= tag[index] then
-            tagMatches = false
-            break
-        end
-    end
-    if not tagMatches then
-        return nil
-    end
-
-    local counter = {}
-    for index = 1, 16 do
-        counter[index] = initialCounter[index]
-    end
-    incrementCounter(counter)
-
-    local plaintext = {}
-    local plaintextBlocks = math.ceil(#ciphertext / 16)
-    for blockIndex = 1, plaintextBlocks do
-        local keystream = encryptBlock(counter, schedule, rounds)
-        for index = 1, 16 do
-            local position = (blockIndex - 1) * 16 + index
-            if position <= #ciphertext then
-                plaintext[position] = bxor(ciphertext[position], keystream[index])
-            end
-        end
-        if blockIndex < plaintextBlocks then
-            incrementCounter(counter)
-        end
-    end
-
-    return plaintext
-end
-local aes = Crypto.aes
-
-aes.new = function(...)
-    return gcmEncrypt(...)
-end
-
-aes.decrypt = function(...)
-    return gcmDecrypt(...)
-end
-local function randomBytes(count)
-    local bytes = {}
-    local index = 1
-    while index <= count do
-        bytes[index] = seededRandom()(0, 255)
-        index = index + 1
-    end
-    return bytes
-end
-local function bytesToString(bytes)
-    local characters = {}
-    for index = 1, #bytes do
-        characters[index] = string.char(bytes[index])
-    end
-    return table.concat(characters)
-end
-local RANDOM_STRING_CHARSET = "abcdefghijklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ123456789"
-
-local function randomString(length)
-    local result = ""
-    for _ = 1, length do
-        local position = seededRandom()(1, 60)
-        result = result .. RANDOM_STRING_CHARSET:sub(position, position)
-    end
-    return result
-end
-local function stringToBytes(text)
-    local bytes = {}
-    local index = 1
-    while index <= #text do
-        bytes[index] = text:byte(index)
-        index = index + 1
-    end
-    return bytes
-end
-local function newByteCipher(seed)
-    local key = band(seed, 255)
-    local cipher = {}
-
-    cipher.dec = function(byte)
-        return bxor(byte, key)
-    end
-
-    cipher.enc = function(byte)
-        key = band(bxor(lshift(key, 1), rshift(key, 7)), 255)
-        return bxor(byte, key)
-    end
-
-    cipher.key = function()
-        return key
-    end
-
-    return cipher
-end
-local function timeSeed()
-    local now = DateTime.now()
-    return math.floor(now.UnixTimestampMillis * 1000000) % 2147483647
-end
-local function deriveOpcodeTable(seed)
-    local opcodes = {}
-    local used = {}
-    local index = 1
-    while index <= 10 do
-        local value = (seededRandom()(30, 240) + seed * index) % 251
-        if not used[value] then
-            opcodes[index] = value
-            used[value] = true
-            index = index + 1
-        end
-    end
-    return opcodes
-end
-local function readProgramOperand(program, index, cipher, mask)
-    if program[index] then
-        local value = cipher.dec(program[index])
-        program[index] = cipher.enc(bxor(value, mask))
-        return program[index]
-    end
-    return nil
-end
-local function runKeyProgram(program, seed)
-    local cipher = newByteCipher(seed)
-    local opcodes = deriveOpcodeTable(seed)
-    local slots = {}
-    local counter = 1
-    local mask = seed
-    local unresolvedSlotValue
-
-    while counter <= #program do
-        local opcode = readProgramOperand(program, counter, cipher, mask)
-        if not opcode then
-            break
-        end
-        counter = counter + 1
-
-        if opcode == opcodes[1] then
-            local target = readProgramOperand(program, counter, cipher, mask)
-            local value = readProgramOperand(program, counter + 1, cipher, mask)
-            if not target or not value then
-                break
-            end
-            counter = counter + 2
-            slots[target] = value
-        elseif opcode == opcodes[2] then
-            local target = readProgramOperand(program, counter, cipher, mask)
-            local source = readProgramOperand(program, counter + 1, cipher, mask)
-            if not target or not source then
-                break
-            end
-            counter = counter + 2
-            slots[target] = bxor(slots[target] or 0, slots[source] or 0)
-        elseif opcode == opcodes[3] then
-            mask = bxor(mask, cipher.key())
-            opcodes = deriveOpcodeTable(mask)
-        elseif opcode == opcodes[4] then
-            local target = readProgramOperand(program, counter, cipher, mask)
-            local source = readProgramOperand(program, counter + 1, cipher, mask)
-            if not target or not source then
-                break
-            end
-            counter = counter + 2
-            if not slots[1] or not slots[2] or not slots[3] or not slots[4] then
-                break
-            end
-            slots[5], slots[6] = Crypto.aes.new(slots[1], slots[2], slots[3], slots[4])
-        elseif opcode == opcodes[5] then
-            if not slots[1] or not slots[2] or not slots[3] or not slots[6] or not slots[4] then
-                break
-            end
-            slots[5], slots[6] = Crypto.aes.decrypt(slots[1], slots[2], slots[3], slots[6], slots[4])
-        elseif opcode == opcodes[6] then
-            local target = readProgramOperand(program, counter, cipher, mask)
-            local source = readProgramOperand(program, counter + 1, cipher, mask)
-            if not target or not source then
-                break
-            end
-            counter = counter + 2
-            slots[target] = slots[source]
-        elseif opcode == opcodes[7] then
-            opcodes = deriveOpcodeTable(bxor(mask, opcode))
-            mask = bxor(mask, opcode * 131)
-        elseif opcode == opcodes[8] then
-            local random = seededRandom()
-            if mask % 7 == 0 then
-                slots[random(1, 12)] = unresolvedSlotValue
-            end
-        elseif opcode == opcodes[9] then
-            local target = readProgramOperand(program, counter, cipher, mask)
-            if not target then
-                break
-            end
-            counter = counter + 1
-            slots[target] = randomBytes(32)
-        elseif opcode == opcodes[10] then
-            local source = readProgramOperand(program, counter, cipher, mask)
-            if source then
-                counter = counter + 1
-            end
-            return slots[source]
-        end
-    end
-
-    return nil
-end
-local function encodeKeyProgram(seed, source)
-    local opcodes = deriveOpcodeTable(seed)
-    local cipher = newByteCipher(seed)
-    local encoded = {}
-    local writeIndex = 1
-    local readIndex = 1
-
-    while readIndex <= #source do
-        local opcodeIndex = source[readIndex]
-        encoded[writeIndex] = cipher.enc(opcodes[opcodeIndex])
-        writeIndex = writeIndex + 1
-        readIndex = readIndex + 1
-
-        if opcodeIndex == 9 or opcodeIndex == 10 then
-            encoded[writeIndex] = cipher.enc(source[readIndex])
-            writeIndex = writeIndex + 1
-            readIndex = readIndex + 1
-        elseif opcodeIndex ~= 3 and opcodeIndex ~= 7 and opcodeIndex ~= 8 then
-            encoded[writeIndex] = cipher.enc(source[readIndex])
-            encoded[writeIndex + 1] = cipher.enc(source[readIndex + 1])
-            writeIndex = writeIndex + 2
-            readIndex = readIndex + 2
-        end
-    end
-
-    return encoded
-end
-local function encryptPayload(plaintext, additionalData)
-    local seed = timeSeed()
-    local program = encodeKeyProgram(seed, KEY_PROGRAM_SOURCE)
-
-    local sessionKey = runKeyProgram(program, seed)
-    if not sessionKey then
-        sessionKey = randomBytes(32)
-    elseif #sessionKey ~= 32 then
-        sessionKey = randomBytes(32)
-    end
-
-    local iv = randomBytes(12)
-    local aadBytes = additionalData
-    if additionalData then
-        aadBytes = stringToBytes(additionalData)
-    end
-    local ciphertext, tag = Crypto.aes.new(sessionKey, iv, stringToBytes(plaintext), aadBytes)
-
-    local masterKey = randomBytes(32)
-    local keyIv = randomBytes(12)
-    local wrappedKey, keyTag = Crypto.aes.new(masterKey, keyIv, sessionKey, nil)
-
-    local payload = {}
-    payload.yea = "have fun decrypting this my guy"
-    payload.ciphertext = ciphertext
-    payload.tag = tag
-    payload.wrappedkey = wrappedKey
-    payload.keytag = keyTag
-    payload.keyiv = keyIv
-    payload.masterkey = masterKey
-    return payload
-end
-local function decryptPayload(envelope)
-    local additionalData
-
-    if not envelope.masterkey then
-        return
-    end
-
-    local sessionKey, keyError = Crypto.aes.decrypt(envelope.masterkey, envelope.wrappedkey, envelope.keyiv, envelope.keytag, nil)
-    if not sessionKey then
-        return nil, keyError or "unknown error"
-    end
-
-    if additionalData then
-        additionalData = stringToBytes(additionalData)
-    end
-
-    local plainBytes, plainError = Crypto.aes.decrypt(sessionKey, envelope.ciphertext, envelope.iv, envelope.tag, additionalData)
-    if not plainBytes then
-        return nil, plainError
-    end
-
-    local plaintext = bytesToString(plainBytes)
-    local decoded = jsonDecode(plaintext)
-
-    if decoded.time and 15 < absOf(DateTime.now().UnixTimestamp - decoded.time) then
-        return
-    end
-
-    return plaintext
-end
-local function buildRequestBody(payload)
-    local envelope = encryptPayload(jsonEncode({data = payload, time = DateTime.now().UnixTimestamp}, false, 0))
-
-    local body = {hoodauth = "focat what ME?"}
-    body.yea = envelope.yea
-
-    for field, aliases in next, PAYLOAD_FIELD_ALIASES do
-        for _, alias in next, aliases do
-            body[alias] = envelope[field]
-        end
-    end
-
-    for _ = 1, seededRandom()(6, 9) do
-        body[randomString(1)] = randomBytes(seededRandom()(8, 22))
-    end
-
-    for _ = 1, seededRandom()(12, 17) do
-        body[randomString(4)] = DECOY_STRINGS[seededRandom()(1, #DECOY_STRINGS)]
-    end
-
-    return body
-end
-local function unpackResponseBody(body)
-    if type(body) == "string" then
-        body = jsonDecode(body)
-    end
-
-    local envelope = {}
-
-    for key, value in next, body do
-        for field, aliases in next, PAYLOAD_FIELD_ALIASES do
-            if indexOfValue(aliases, key) then
-                envelope[field] = value
-            end
-        end
-    end
-
-    return envelope
-end
-local function authenticate()
-    local nonce = randomString(10) .. "-" .. randomString(6) .. "-" .. randomString(6) .. "-" .. randomString(14)
-
-    local hwidResponse = request({
-        Url = "https://api.catvape.dev/gethwid",
-        Method = "POST",
-        Body = jsonEncode({response = buildRequestBody(jsonEncode({nonce = nonce}, false, 0))}, false, 0)
-    })
-
-    if hwidResponse.StatusCode ~= 200 then
-        notify("Cat", "Failed to grab hwid.", 20, "alert")
-        return
-    end
-
-    local hwidPayload = jsonDecode(decryptPayload(unpackResponseBody(jsonDecode(hwidResponse.Body, false, 0).response)))
-
-    if not hwidPayload.success then
-        notify("Cat", "Couldn't process login request.", 20, "alert")
-        return
-    end
-
-    if hwidPayload.nonce ~= nonce then
-        notify("Cat", "Couldn't process login request.", 20, "alert")
-        return
-    end
-
-    local teleportData = teleportService:GetLocalPlayerTeleportData() or {}
-    local startedAt = DateTime.now().UnixTimestampMillis
-    local executorName, executorVersion = identifyexecutor()
-    local players = game:GetService("Players")
-    local player = players.LocalPlayer
-
-    nonce = randomString(8) .. randomString(4) .. randomString(4) .. randomString(12)
-
-    local loginResponse = request({
-        Url = "https://api.catvape.dev/login",
-        Method = "POST",
-        Body = jsonEncode({
-            response = buildRequestBody(jsonEncode({
-                key = (userConfig and userConfig.Key) or "_key",
-                nonce = nonce,
-                executor = ("%*%*"):format(executorName, (executorVersion and " " .. executorVersion) or "")
-            }, false, 0))
-        }, false, 0)
-    })
-
-    local socket
-
-    local socketThread = task.spawn(function()
-        while true do
-            local closed = false
-
-            socket = WebSocket.connect("wss://api.catvape.dev/usercount")
-            socket.OnClose:Connect(function()
-                closed = false
-            end)
-
-            local handshake = {}
-            handshake.hash = vape.Libraries.whitelist.hashes[player.Name .. toStringValue(player.UserId)]
-
-            local matchId = teleportData and teleportData.match
-            if matchId then
-                matchId = teleportData.match.matchId
-            end
-            handshake.key = vape.Libraries.hash.sha512(matchId or game.JobId)
-
-            socket:Send(jsonEncode({
-                type = "ping",
-                data = buildRequestBody(jsonEncode(handshake, false, 0))
-            }, false, 0))
-
-            debugPrint("connected to ws")
-
-            local lastPing = os.clock()
-
-            while true do
-                if 20 <= os.clock() - lastPing then
-                    socket:Send(jsonEncode({type = "ping"}, false, 0))
-                    lastPing = os.clock()
-                end
-
-                task.wait()
-
-                if closed or vape.Loaded == nil then
-                    break
-                end
-            end
-
-            socket = nil
-
-            if vape.Loaded == nil then
-                break
-            end
-
-            task.wait(2)
-
-            if vape.Loaded == nil then
-                break
-            end
-        end
-    end)
-
-    vape:Clean(function()
-        if socket then
-            socket:Close()
-            socket = nil
-        end
-        task.cancel(socketThread)
-    end)
-
-    if loginResponse.StatusCode == 200 then
-        local payload = jsonDecode(decryptPayload(unpackResponseBody(jsonDecode(loginResponse.Body).response)))
-
-        if payload and typeof(payload) == "table" and payload.success then
-            if payload.nonce ~= nonce then
-                notify("Cat", "We couldn't process ur premium request.", 20, "alert")
-            else
-                debugPrint("Authenticated in", (DateTime.now().UnixTimestampMillis - startedAt) / 1000 .. "s")
-
-                local role = payload.role
-                getSharedState().catrole = role:sub(0, 1):upper() .. role:sub(2, #role)
-                getSharedState().catname = payload.discord_username
-
-                if role == "paid" and vape.Place == 6872274481 then
-                    isPaidUser = false
-                end
-
-                authFinished = false
-            end
-        end
-    elseif loginResponse.StatusCode == 400 then
-        for _, message in jsonDecode(loginResponse.Body).errors[1] do
-            if not message:find("using a key") then
-                notify("Cat", "Authentication error: " .. message, 20, "alert")
-                task.spawn(function()
-                    error(message, 8)
-                end)
-            end
-        end
-    elseif loginResponse.StatusCode == 404 then
-        local body = jsonDecode(loginResponse.Body, nil)
-
-        if typeof(body) == "table" then
-            local firstError = body.errors[1]
-
-            if firstError.HWID_MISMATCH then
-                getSharedState().catrole = "HWID MISMATCH"
-            elseif firstError.umightbeblacklisted then
-                for _, module in vape.Modules do
-                    pcall(vape.Remove, vape, module)
-                end
-
-                player:Kick("you may be blacklisted from cv")
-                return
-            end
-        end
-    end
-end
 local function getAuraWeapon()
     if not entity.isAlive then
         return
@@ -1661,6 +238,7 @@ local function getAuraWeapon()
         return slot, itemMeta
     end
 end
+
 local function getDynamicHitDelay(target, itemMeta)
     local delay = ((itemMeta.displayName:find(" Chainsaw") and 0.11) or 0.29) + 0.03
 
@@ -1671,6 +249,7 @@ local function getDynamicHitDelay(target, itemMeta)
 
     return delay
 end
+
 local function getAuraAimPoint(target)
     if targetAreaDropdown.Value ~= "Closest" then
         return target.RootPart.Position
@@ -1703,6 +282,7 @@ local function getAuraAimPoint(target)
 
     return closestPart.Position
 end
+
 local function easeInOutCubic(alpha)
     if alpha < 0.5 then
         return 4 * alpha * alpha * alpha
@@ -1710,6 +290,7 @@ local function easeInOutCubic(alpha)
 
     return 1 - math.pow(-2 * alpha + 2, 3) / 2
 end
+
 local function getAuraCameraCFrame(cameraCFrame, target, deltaTime, aimStartTime)
     local progress = easeInOutCubic(math.min((tick() - aimStartTime) / (1 / (aimSpeedSlider.Value * 0.5)), 1))
     local generator = Random.new()
@@ -1725,6 +306,7 @@ local function getAuraCameraCFrame(cameraCFrame, target, deltaTime, aimStartTime
 
     return cameraCFrame:Lerp(goal, aimRate * deltaTime), aimRate
 end
+
 local function runSilentAura(enabled)
     if not enabled then
         entity.character.Humanoid.AutoRotate = false
@@ -1889,117 +471,8 @@ local function runSilentAura(enabled)
         end
     until not silentAura.Enabled
 end
-local function getKillauraWeapon()
-    if killauraRequireMouseDownToggle.Enabled and not UserInputService:IsMouseButtonPressed(0) then
-        return
-    end
 
-    if killauraGuiCheckToggle.Enabled and bedwars.AppController:isLayerOpen(bedwars.UILayers.MAIN) then
-        return
-    end
-
-    if killauraAttackableCheckToggle.Enabled then
-        if not entity.isAlive then
-            return
-        end
-        if workspace:GetServerTimeNow() < (localPlayer.Character:GetAttribute("StunnedUntilTime") or 0) then
-            return
-        end
-        if localPlayer.Character:FindFirstChild("elk") then
-            return
-        end
-        if bedwars.StatusEffectUtil:isActive(localPlayer.Character, "frozen") then
-            return
-        end
-    end
-
-    local held = (killauraLimitToItemsToggle.Enabled and store.hand) or store.tools.sword
-    if not held or not held.tool then
-        return
-    end
-
-    local itemMeta = bedwars.ItemMeta[held.tool.Name]
-
-    if killauraLimitToItemsToggle.Enabled then
-        local hand = store.hand
-        if hand.toolType ~= "sword" or bedwars.DaoController.chargingMaid then
-            return held, itemMeta
-        end
-    end
-
-    local manualSwing = killauraSwingOnlyToggle.Enabled and 0.2 < tick() - bedwars.SwordController.lastSwing
-    return held, itemMeta, not manualSwing
-end
-local function findAmmoForProjectile(projectileSource)
-    for _, item in store.inventory.inventory.items do
-        if projectileSource.ammoItemTypes and table.find(projectileSource.ammoItemTypes, item.itemType) then
-            return item.itemType
-        end
-    end
-end
-local function collectProjectileLaunchers()
-    local launchers = {}
-
-    for _, item in store.inventory.inventory.items do
-        local meta = bedwars.ItemMeta[item.itemType]
-        local projectileSource = meta and meta.projectileSource
-
-        local ammoType = projectileSource
-        if projectileSource then
-            ammoType = findAmmoForProjectile(projectileSource)
-        end
-
-        if ammoType then
-            local enabledList = killauraProjectilesList.ListEnabled
-            if table.find(enabledList, ammoType)
-                or table.find(enabledList, item.itemType)
-                or table.find(enabledList, meta.displayName) then
-                table.insert(launchers, {
-                    item,
-                    ammoType,
-                    projectileSource.projectileType(ammoType),
-                    projectileSource,
-                })
-            end
-        end
-    end
-
-    return launchers
-end
-local function sampleTargetMotion(targetEntity, part)
-    local now = tick()
-    local velocity = part.AssemblyLinearVelocity
-    local lastSample = targetEntity.KillauraSample
-    local acceleration = Vector3.zero
-
-    if lastSample then
-        local elapsed = now - lastSample.Time
-        if 0.004 < elapsed and elapsed < 0.4 then
-            acceleration = (velocity - lastSample.Velocity) / elapsed
-            if 320 < acceleration.Magnitude then
-                acceleration = acceleration.Unit * 320
-            end
-        end
-    end
-
-    targetEntity.KillauraSample = {Time = now, Velocity = velocity}
-    return velocity, acceleration
-end
-local function predictHitPoint(targetEntity, part, aimPoint)
-    local velocity, acceleration = sampleTargetMotion(targetEntity, part)
-    local lead = math.clamp(store.ping.total or 0, 0, 0.4)
-
-    local predictedPosition = part.Position + velocity * lead + acceleration * (0.5 * lead * lead)
-    local predictedCFrame = part.CFrame + (predictedPosition - part.Position)
-    local halfSize = part.Size * 0.5
-    local localPoint = predictedCFrame:PointToObjectSpace(aimPoint)
-
-    return predictedCFrame * Vector3.new(
-        math.clamp(localPoint.X, -halfSize.X, halfSize.X),
-        math.clamp(localPoint.Y, -halfSize.Y, halfSize.Y),
-        math.clamp(localPoint.Z, -halfSize.Z, halfSize.Z)
-    )
-end
+-- Setup Killaura
 local function setupKillaura()
     local killaura
     local targets
@@ -2040,6 +513,8 @@ local function setupKillaura()
     local auraAnims = vape.Libraries.auraanims
     local currentTween
     local defaultWristC0
+    local killauraAnimating = false
+    local originalPlaySwordEffect = bedwars.SwordController.playSwordEffect
 
     local function runCustomAnimation()
         local resetWrist = false
@@ -2516,6 +991,8 @@ local function setupKillaura()
         Tooltip = "Only attacks while swinging manually",
     })
 end
+
+-- Setup Skin Changer
 local function setupSkinChanger()
     local skinChanger
     local skinDropdowns = {}
@@ -2620,6 +1097,8 @@ local function setupSkinChanger()
         end
     end
 end
+
+-- Auto Beekeeper
 run(function()
     local autoBeekeeper, collectBees, collectRange, collectDelay, limitToItem
     local depositBees, depositRange, depositDelay
@@ -2753,6 +1232,8 @@ run(function()
         Darker = false,
     })
 end)
+
+-- Auto Davey
 run(function()
     local autoDavey, legitSwitch, breakOnImpact, jumpOnImpact
     local originalLaunchSelf
@@ -2803,6 +1284,8 @@ run(function()
     breakOnImpact = autoDavey:CreateToggle({ Name = "Break on impact" })
     legitSwitch = autoDavey:CreateToggle({ Name = "Legit switch" })
 end)
+
+-- Auto Drill
 run(function()
     local autoDrill, autoCollect, notifyOnCollect, autoAttack, legitRange
     local range, attackDelay, collectDelay, targets, sortMode
@@ -3038,6 +1521,8 @@ run(function()
 
     updateAttackOptions()
 end)
+
+-- Auto Grim
 run(function()
     local autoGrim, grimRange, grimDelay
     local registerSoulInteractions = bedwars.GrimReaperController.registerSoulInteractions
@@ -3077,6 +1562,8 @@ run(function()
         Decimal = 10,
     })
 end)
+
+-- Auto Krystal
 run(function()
     local autoKrystal
 
@@ -3106,6 +1593,8 @@ run(function()
         Tooltip = "Automatically uses freeze ability when near\nopponent's bed defense.",
     })
 end)
+
+-- Auto Ragnar
 run(function()
     local autoRagnar
 
@@ -3142,6 +1631,8 @@ run(function()
         Tooltip = "Automatically uses \"Berserker Rage\" ability when near\nopponent's bed.",
     })
 end)
+
+-- Auto Vanessa
 run(function()
     local autoVanessa
     local originalGetChargeTime, chargeTimeHook, originalOverchargeStartTime, tripleShotController
@@ -3194,6 +1685,8 @@ run(function()
         Tooltip = "Fully charges your bow instantly and enables triple shot as Vanessa",
     })
 end)
+
+-- Auto Zeno
 run(function()
     local autoZeno, targets, targetMode, limitToItem, autoShockwave
     local shockwaveRange, useLightningStrike, useLightningStorm, zenoRange, zenoDelay
@@ -3329,6 +1822,8 @@ run(function()
         end,
     })
 end)
+
+-- Auto Bank (Premium)
 if premiumUnlocked then
     local RunService = game:GetService("RunService")
     local GuiService = game:GetService("GuiService")
@@ -3590,6 +2085,8 @@ if premiumUnlocked then
         Default = false,
     })
 end
+
+-- Auto Cyber (Premium)
 if premiumUnlocked then
     local CollectionService = game:GetService("CollectionService")
 
@@ -4009,6 +2506,7 @@ if premiumUnlocked then
     })
 end
 
+-- Silent Aura Module
 silentAura = vape.Categories.Combat:CreateModule({
     Name = "SilentAura",
     Function = runSilentAura,
@@ -4131,6 +2629,8 @@ attackColorSlider = silentAura:CreateColorSlider({
 })
 
 limitToItemsToggle = silentAura:CreateToggle({Name = "Limit to items"})
+
+-- Cheat Detector
 do
     local cheatDetector
     local checks = {}
@@ -4256,6 +2756,8 @@ do
         })
     end
 end
+
+-- Device Spoofer
 do
     local deviceSpoofer
     local device
@@ -4305,6 +2807,8 @@ do
         end
     })
 end
+
+-- Bed Patcher
 do
     local bedPatcher
     local placeRange
@@ -4466,6 +2970,8 @@ do
         Name = "Limit to item"
     })
 end
+
+-- Block In
 do
     local blockIn
     local placeDelay
@@ -4681,6 +3187,8 @@ do
         Default = {"cannon", "siege_tnt", "tnt"}
     })
 end
+
+-- Davey Aim
 do
     local RunService = game:GetService("RunService")
 
@@ -4803,6 +3311,8 @@ do
         Default = false
     })
 end
+
+-- Infinite Krystal
 do
     local infiniteKrystal
     local originalUpdateMomentum
@@ -4838,6 +3348,8 @@ do
         end
     })
 end
+
+-- Jade Extender
 do
     local jadeExtender
     local multiplier
@@ -4919,6 +3431,8 @@ do
         Suffix = "x"
     })
 end
+
+-- Phase Mine
 do
     local phaseMine
     local ignoredParts = {}
@@ -4967,6 +3481,8 @@ do
         Tooltip = "Allows you to mine through opponents"
     })
 end
+
+-- Void Regent Extender
 do
     local voidRegentExtender
     local multiplier
@@ -5047,6 +3563,8 @@ do
         Suffix = "x"
     })
 end
+
+-- Vulcan Assist
 do
     local vulcanAssist
     local targets
@@ -5143,6 +3661,8 @@ do
         Default = 500
     })
 end
+
+-- Cat Extender
 do
     local catExtender
     local multiplier
@@ -5230,6 +3750,8 @@ do
         Suffix = "x"
     })
 end
+
+-- Yuzi Extender
 do
     local yuziExtender
     local multiplier
@@ -5311,6 +3833,11 @@ do
         Suffix = "x"
     })
 end
+
+-- Setup Killaura and Skin Changer
+setupKillaura()
+setupSkinChanger()
+
 if vape and vape.Loaded ~= nil then
     vape.Init = nil
     vape:Load()
